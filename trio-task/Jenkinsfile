@@ -14,7 +14,7 @@ pipeline {
 	MYSQL_TEST = credentials("MYSQL_TEST")
   }
   stages {
-      
+   node("manager"){   
     stage('Build') {
       steps {
         sh 'docker build -t riham80/mysql-5.7:latest trio-task/db'
@@ -28,14 +28,14 @@ pipeline {
           sh ' echo testing'
            }
        }*/
-    node('manager'){
+    
     stage('RUN') {
       steps {
 	      
            sh ' docker stack deploy --compose-file docker-compose.yaml stack1 '
         }
       }
-    }
+ 
     stage('Push') {
        steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
@@ -44,7 +44,7 @@ pipeline {
            }
        } 
     
-
+   }
   } //stages
   post {
     always {
