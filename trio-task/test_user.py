@@ -10,7 +10,7 @@ class TestBase(TestCase):
 
         
        
-        app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///data.db", SECRET_KEY='cvm859df', DEBUG=True, WTF_CSRF_ENABLED=False)
+        app.config.update(SECRET_KEY='cvm859df', DEBUG=True, WTF_CSRF_ENABLED=False)
         db = SQLAlchemy(app)
         return app
 
