@@ -1,7 +1,7 @@
 version: "3.8"
 services:
       flask-app:
-        image: riham80/flask-library:latest
+        image: riham80/flask-app:latest
         ports:
               - target: 5000
                 published: 5000
@@ -9,7 +9,7 @@ services:
         depends_on:
               - "mysql"
       mysql:
-       image: riham80/db-proj:latest
+       image: riham80/mysql-5.7:latest
        ports:
              - target: 3306
                published: 3306
