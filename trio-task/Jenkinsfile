@@ -34,6 +34,7 @@ pipeline {
     stage('RUN') {
       steps {
 	   checkout scm   
+	   sh ' docker swarm init'
            sh ' docker stack deploy --compose-file trio-task/docker-compose.yaml stack1 '
         }
       }
