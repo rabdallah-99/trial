@@ -22,7 +22,7 @@ pipeline {
             sh ' docker push riham80/flask-app:latest'
            }
  
-      }
+     
     }
    /* stage('Test') {
        steps {
@@ -42,7 +42,7 @@ pipeline {
        steps {
           sh 'echo pushed'
        } 
-    
+    }
   
   } //stages
   post {
