@@ -10,7 +10,7 @@ pipeline {
 	MYSQL_USER= 'root'
 	MYSQL_URL = 'mysql'
 	MYSQL_DATABASE = 'library'
-	MYSQL_PASSWORD = credentials("MYSQL_PASSWORD")
+	
 	MYSQL_TEST = credentials("MYSQL_TEST")
   }
   stages {
