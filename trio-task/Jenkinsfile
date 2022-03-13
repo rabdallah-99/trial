@@ -17,8 +17,8 @@ pipeline {
       
     stage('Build') {
       steps {
-        sh 'docker build -t riham80/mysql-5.7:latest db'
-	    sh 'docker build -t riham80/flask-app:latest flask-app '
+        sh 'docker build -t riham80/mysql-5.7:latest trio-task/db'
+	    sh 'docker build -t riham80/flask-app:latest trio-task/flask-app '
  
       }
     }
