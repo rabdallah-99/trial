@@ -16,32 +16,31 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'docker build -t riham80/databasemysql:latest database'
-	    sh 'docker build -t riham80/flask-library:latest . '
+        sh 'docker build -t riham80/mysql-5.7:latest db'
+	    sh 'docker build -t riham80/flask-app:latest flask-app '
  
       }
     }
-
-    stage('RUN') {
-      steps {
-        sh ' docker network create mynetwork '
-	    sh ' docker run -d --name mysql --network mynetwork databasemysql:8'
-	    sh 'docker run -d --name flask-app1  -p 5000:5000 --network mynetwork flask-library:latest'
-        }
-    }
-    stage('Push') {
-       steps {
-          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          sh ' docker push riham80/flask-library:latest'
-          sh ' docker push riham80/databasemysql:latest'
-           }
-       } 
     stage('Test') {
        steps {
           sh ' bash test.sh  '
           sh ' echo testing'
            }
        }
+
+    stage('RUN') {
+      steps {
+           docker swarm
+        }
+    }
+    stage('Push') {
+       steps {
+          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          sh ' docker push riham80/mysql-5.7:latest'
+          sh ' docker push riham80/flask-app:latest'
+           }
+       } 
+    
 
   } //stages
   post {
