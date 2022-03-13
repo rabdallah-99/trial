@@ -1,5 +1,5 @@
 from flask_testing import TestCase
-
+from flask_app.app import Users
 class TestBase(TestCase):
     def create_app(self):
         config_name = "Testing"
