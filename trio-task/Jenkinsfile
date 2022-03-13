@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent manager
       options {
     buildDiscarder(logRotator(numToKeepStr: '5'))
   }
@@ -14,6 +14,7 @@ pipeline {
 	MYSQL_TEST = credentials("MYSQL_TEST")
   }
   stages {
+      
     stage('Build') {
       steps {
         sh 'docker build -t riham80/mysql-5.7:latest db'
@@ -30,8 +31,10 @@ pipeline {
 
     stage('RUN') {
       steps {
-           docker swarm
+	      sshagent(credentials:['019a24ec-56e5-4bc3-8926-3584ab2cdbd1']){
+           sh ' docker stack deploy --compose-file docker-compose.yaml stack1 '
         }
+      }
     }
     stage('Push') {
        steps {
