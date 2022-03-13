@@ -24,7 +24,7 @@ pipeline {
     }
     stage('Test') {
        steps {
-          sh ' bash test.sh  '
+          sh ' bash trio-task/test.sh  '
           sh ' echo testing'
            }
        }
