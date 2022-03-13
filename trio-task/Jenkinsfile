@@ -15,8 +15,12 @@ pipeline {
    
     stage('Build') {
       steps {
-        sh 'docker build -t riham80/mysql-5.7:latest trio-task/db'
+            sh 'docker build -t riham80/mysql-5.7:latest trio-task/db'
 	    sh 'docker build -t riham80/flask-app:latest trio-task/flask-app '
+	    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            sh ' docker push riham80/mysql-5.7:latest'
+            sh ' docker push riham80/flask-app:latest'
+           }
  
       }
     }
@@ -36,10 +40,7 @@ pipeline {
  
     stage('Push') {
        steps {
-          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          sh ' docker push riham80/mysql-5.7:latest'
-          sh ' docker push riham80/flask-app:latest'
-           }
+          sh 'echo pushed'
        } 
     
   
