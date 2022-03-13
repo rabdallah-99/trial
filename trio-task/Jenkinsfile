@@ -28,7 +28,7 @@ pipeline {
           sh ' echo testing'
            }
        }*/
-	  node('manager'){
+    node('manager'){
     stage('RUN') {
       steps {
 	      
