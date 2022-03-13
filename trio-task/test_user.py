@@ -2,11 +2,16 @@ from flask_testing import TestCase
 class TestBase(TestCase):
     def create_app(self):
         config_name = "Testing"
+        app = Flask(__name__)
 
         # Pass in testing configurations for the app.
         # Here we use sqlite without a persistent database for our tests.
+        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
+
+        
        
         app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///data.db", SECRET_KEY='cvm859df', DEBUG=True, WTF_CSRF_ENABLED=False)
+        db = SQLAlchemy(app)
         return app
 
     def setUp(self):
