@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+      flask-app:
+        image: riham80/flask-library:latest
+        ports:
+              - target: 5000
+                published: 5000
+                protocol: tcp
+        depends_on:
+              - "mysql"
+      mysql:
+       image: riham80/db-proj:latest
+       ports:
+             - target: 3306
+               published: 3306
